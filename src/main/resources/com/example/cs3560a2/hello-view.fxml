@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="610.0" prefWidth="798.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs3560a2.HelloController">
+<VBox alignment="CENTER" prefHeight="610.0" prefWidth="798.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs3560a2.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -19,42 +18,28 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="222.0">
                <children>
-                  <Accordion layoutX="10.0" layoutY="37.0">
-                    <panes>
-                      <TitledPane animated="false" text="untitled 1">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="untitled 2">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="untitled 3">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                    </panes>
-                  </Accordion>
+                  <VBox fx:id="ul" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="570.0" prefWidth="155.0">
                <children>
-                  <TextField layoutX="97.0" layoutY="40.0" prefHeight="26.0" prefWidth="278.0" promptText="USER ID" />
-                  <Button layoutX="391.0" layoutY="40.0" mnemonicParsing="false" text="Submit" />
-                  <TextField layoutX="96.0" layoutY="90.0" prefHeight="26.0" prefWidth="278.0" promptText="GROUP ID" />
-                  <Button layoutX="391.0" layoutY="90.0" mnemonicParsing="false" text="Submit" />
-                  <Button layoutX="100.0" layoutY="159.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="343.0" text="User View">
+                  <Pane layoutX="96.0" layoutY="40.0">
+                     <children>
+                        <TextField fx:id="idField" layoutX="1.0" prefHeight="26.0" prefWidth="278.0" promptText="USER ID" />
+                        <Button fx:id="addUser" layoutX="295.0" mnemonicParsing="false" onMouseClicked="#addButtonHandler" prefHeight="25.0" prefWidth="74.0" text="Add User" />
+                        <TextField fx:id="groupField" layoutY="50.0" prefHeight="26.0" prefWidth="278.0" promptText="GROUP ID" />
+                        <Button fx:id="addGroup" layoutX="295.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#addGroupHandler" text="Add Group" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="checkUser" layoutX="100.0" layoutY="159.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="343.0" text="User View">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button layoutX="100.0" layoutY="398.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="350.0" layoutY="398.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="100.0" layoutY="476.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="350.0" layoutY="476.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="showTotal" layoutX="63.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="172.0" text="Show Total User" />
+                  <Button fx:id="showGroupTotal" layoutX="309.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="172.0" text="Show Group Total" />
+                  <Button fx:id="showMessageTotal" layoutX="64.0" layoutY="476.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="172.0" text="Show Messages Total" />
+                  <Button fx:id="showPositive" layoutX="310.0" layoutY="476.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="172.0" text="Show Positive Percentage" />
                </children>
             </AnchorPane>
         </items>
