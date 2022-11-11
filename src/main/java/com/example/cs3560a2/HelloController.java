@@ -50,7 +50,20 @@ public class HelloController implements Initializable {
     private void addGroupHandler(){
         String groupName = groupField.getText();
         if(groupName.length() != 0){
-            groups.setGroup(groupName);
+            TreeItem temp = (TreeItem) ul.getSelectionModel().getSelectedItem();
+            if(temp != null){
+                String id = (String) temp.getValue();
+                User user = null;
+                for (User user1 : userList){
+                    if(user1.getUserID().equals(id)){
+                        user = user1;
+                    }
+                }
+                groups.setGroup(groupName);
+                groups.setGroupMember(groupName, user);
+            }else{
+                groups.setGroup(groupName);
+            }
         }
     }
 
@@ -79,30 +92,33 @@ public class HelloController implements Initializable {
     private void userView(){
         TreeItem temp = (TreeItem) ul.getSelectionModel().getSelectedItem();
 
-        String id = (String) temp.getValue();
-        User user = null;
-        for (User user1 : userList){
-            if(user1.getUserID().equals(id)){
-                user = user1;
+        if(temp != null){
+            String id = (String) temp.getValue();
+            User user = null;
+            for (User user1 : userList){
+                if(user1.getUserID().equals(id)){
+                    user = user1;
+                }
             }
+            URL location = getClass().getResource("/com/example/cs3560a2/tweetPage.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(location);
+            Scene scene = null;
+            Stage stage = new Stage();
+            try {
+                Parent root = fxmlLoader.load();
+                TweetPage controller = fxmlLoader.getController();
+                controller.getCurrentUser(user);
+                controller.start();
+                scene = new Scene(root, 600, 700);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.initModality(Modality.NONE);
+            stage.show();
         }
-        URL location = getClass().getResource("/com/example/cs3560a2/tweetPage.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(location);
-        Scene scene = null;
-        Stage stage = new Stage();
-        try {
-            Parent root = fxmlLoader.load();
-            TweetPage controller = fxmlLoader.getController();
-            controller.getCurrentUser(user);
-            controller.start();
-            scene = new Scene(root, 600, 700);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.initModality(Modality.NONE);
-        stage.show();
+
     }
 
     private void showDialog(String text, String title){

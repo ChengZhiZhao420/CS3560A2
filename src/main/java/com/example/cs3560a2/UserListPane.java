@@ -35,6 +35,7 @@ public class UserListPane implements Observer{
     public void update(Subject subject) {
         if(subject instanceof Group){
             HashMap<String, List<User>> groupList = ((Group) subject).getGroupList();
+            userPane.getRoot().getChildren().clear();
             groupList.forEach((key, value)->{
                 TreeItem ti;
                 if(!paneList.containsKey(key)){
@@ -49,8 +50,11 @@ public class UserListPane implements Observer{
 
                 }else{
                     ti = paneList.get(key);
+
+                    if(!key.equals("Root")){
+                        userPane.getRoot().getChildren().setAll(ti);
+                    }
                 }
-                ti.getChildren().clear();
 
                 value.forEach((user)->{
                     TreeItem newUser = new TreeItem<>(user.getUserID());

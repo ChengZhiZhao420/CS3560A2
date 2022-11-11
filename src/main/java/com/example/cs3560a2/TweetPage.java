@@ -18,6 +18,8 @@ import static com.example.cs3560a2.HelloController.userList;
 
 public class TweetPage implements Initializable {
     private ObservableList<String> items;
+    private ObservableList<String> followItem;
+
     private User currentUser;
 
     @FXML
@@ -65,20 +67,21 @@ public class TweetPage implements Initializable {
     }
 
     public void start(){
-        List<Friend> followList = currentUser.getFollowList();
-        for (Friend friend : followList){
+        List<Friend> followList2 = currentUser.getFollowList();
+        for (Friend friend : followList2){
             List<String> messageList = friend.accept(currentUser);
             for (String s : messageList) {
                 items.add(((User) friend).getUserID() + ": " + s);
                 followerPost.setItems(items);
             }
-
+            followItem.add(((User) friend).getUserID());
+            followList.setItems(followItem);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
          items = FXCollections.observableArrayList ();
-
+         followItem = FXCollections.observableArrayList ();
     }
 }

@@ -27,6 +27,18 @@ public class Group extends Subject implements Observer{
 
     public boolean setGroupMember(String groupName, User user){
         if(groupList.containsKey(groupName)){
+            groupList.forEach((key, list)->{
+                boolean found = false;
+                for(User temp : list){
+                    if(temp.getUserID().equals(user.getUserID())){
+                        found = true;
+                    }
+                }
+
+                if(found){
+                    list.remove(user);
+                }
+            });
             groupList.get(groupName).add(user);
             notifyObserver();
             return true;
