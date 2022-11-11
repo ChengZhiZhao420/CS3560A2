@@ -42,19 +42,23 @@ public class User extends Subject implements Visitor, Friend{
         }
     }
 
-    @Override
-    public void accept(Visitor user) {
-        followList.forEach((friend -> {
+    public List<Friend> getFollowList() {
+        return followList;
+    }
 
-            user.visit(friend);
-        }));
+    public List<String> getMessageList(){
+        return messageList;
     }
 
     @Override
-    public void visit(Friend user) {
+    public List<String> accept(Visitor user) {
+
+        return user.visit(this);
+    }
+
+    @Override
+    public List<String> visit(Friend user) {
         User user1 = (User) user;
-        user1.messageList.forEach(message->{
-            System.out.println(message);
-        });
+        return user1.getMessageList();
     }
 }

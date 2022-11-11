@@ -1,28 +1,33 @@
 package com.example.cs3560a2;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class UserListPane implements Observer{
     @FXML
-    private VBox userPane;
-    private List<String> paneList;
+    private TreeView userPane;
+    private HashMap<String, TreeItem> paneList;
 
-    public UserListPane(VBox userPane){
+    public UserListPane(TreeView userPane){
         this.userPane = userPane;
-        paneList = new ArrayList<>();
+        paneList = new HashMap<>();
         System.out.println(userPane.getId());
     }
 
@@ -30,44 +35,31 @@ public class UserListPane implements Observer{
     public void update(Subject subject) {
         if(subject instanceof Group){
             HashMap<String, List<User>> groupList = ((Group) subject).getGroupList();
-
             groupList.forEach((key, value)->{
-                VBox newHBox;
-                if(!paneList.contains(key)){
-                    TitledPane newTitlePane = new TitledPane();
-                    newHBox = new VBox();
-                    newHBox.setId("box");
-                    newTitlePane.setText(key);
-                    newTitlePane.setId(key);
-                    newTitlePane.setContent(newHBox);
+                TreeItem ti;
+                if(!paneList.containsKey(key)){
+                    if(key.equals("Root")){
+                       ti = userPane.getRoot();
+                    }else{
+                        ti = new TreeItem(key);
+                        userPane.getRoot().getChildren().setAll(ti);
+                    }
 
-                    paneList.add(key);
-                    userPane.getChildren().add(newTitlePane);
+                    paneList.put(key, ti);
 
                 }else{
-                    newHBox = (VBox) userPane.lookup("#" + key).lookup("#box");
-                    newHBox.getChildren().clear();
+                    ti = paneList.get(key);
                 }
+                ti.getChildren().clear();
 
                 value.forEach((user)->{
-                    Button userID = new Button(user.getUserID());
-                    userID.setOnAction(e->{
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("tweetPage.fxml"));
-                        Stage stage = new Stage();
-                        Scene scene = null;
-                        try {
-                            scene = new Scene(fxmlLoader.load(), 600, 700);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        stage.setTitle("Hello!");
-                        stage.setScene(scene);
-                        stage.show();
-                    });
-                    newHBox.getChildren().add(userID);
+                    TreeItem newUser = new TreeItem<>(user.getUserID());
+                    ti.getChildren().addAll(newUser);
                 });
 
             });
         }
     }
+
+
 }
