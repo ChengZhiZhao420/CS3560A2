@@ -8,21 +8,33 @@ public class User extends Subject implements Visitor, Friend{
     private List<String> messageList;
 
     private List<Friend> followList;
+    private String creationTime;
+    private String lastUpdate = "";
 
     public User(String userID, Observer paneObserver){
         this.userID = userID;
         messageList = new ArrayList<>();
         followList = new ArrayList<>();
+        creationTime = String.valueOf(System.currentTimeMillis());
         attachObserver(paneObserver);
         notifyObserver();
     }
 
     public void sentMessage(String message){
         messageList.add(message);
+        lastUpdate = String.valueOf(System.currentTimeMillis());
     }
 
     public String getUserID(){
         return userID;
+    }
+
+    public long getLastUpdateTime(){
+        if(lastUpdate != ""){
+            return Long.parseLong(lastUpdate);
+        }else {
+            return 0;
+        }
     }
 
     public boolean setFollowList(User user){
@@ -60,5 +72,9 @@ public class User extends Subject implements Visitor, Friend{
     public List<String> visit(Friend user) {
         User user1 = (User) user;
         return user1.getMessageList();
+    }
+
+    public String getCreationTime(){
+        return creationTime;
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -40,9 +41,27 @@ public class HelloController implements Initializable {
     @FXML
     private void addButtonHandler(){
         String id = idField.getText();
+        final Boolean[] isExist = {false};
         if(id.length() != 0){
-            User newUser = new User(id, groups);
-            userList.add(newUser);
+            userList.forEach((User)->{
+                if(User.getUserID().equals(id)){
+                    isExist[0] = true;
+                }
+            });
+            if(!isExist[0]){
+                User newUser = new User(id, groups);
+                userList.add(newUser);
+            }else{
+                Dialog<String> dialog = new Dialog<String>();
+                //Setting the title
+                ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                dialog.getDialogPane().getButtonTypes().add(type);
+                dialog.setTitle("Warning");
+                dialog.setContentText("ID Have Been Taken");
+                dialog.showAndWait();
+
+            }
+
         }
     }
 
@@ -86,6 +105,49 @@ public class HelloController implements Initializable {
             }
         }
         showDialog(text, "Total Message");
+    }
+
+    @FXML
+    private void getTimeCreated(){
+        TreeItem temp = (TreeItem) ul.getSelectionModel().getSelectedItem();
+
+        if(temp != null) {
+            String id = (String) temp.getValue();
+            User user = null;
+            for (User user1 : userList) {
+                if (user1.getUserID().equals(id)) {
+                    user = user1;
+                }
+            }
+
+            Dialog<String> dialog = new Dialog<String>();
+            //Setting the title
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().add(type);
+            dialog.setTitle("Information");
+            dialog.setContentText("Here is your create time: " + user.getCreationTime());
+            dialog.showAndWait();
+        }
+    }
+
+    @FXML
+    private void getLastUpdate(){
+        long maximum = 0;
+        User latestUser = null;
+
+        for (User user : userList) {
+            if(user.getLastUpdateTime() > maximum){
+                maximum = user.getLastUpdateTime();
+                latestUser = user;
+            }
+        }
+        Dialog<String> dialog = new Dialog<String>();
+        //Setting the title
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.setTitle("Information");
+        dialog.setContentText("Last Update User: " + latestUser.getUserID() + "; Here is the time:" + maximum);
+        dialog.showAndWait();
     }
 
     @FXML

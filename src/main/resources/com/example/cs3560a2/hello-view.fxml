@@ -10,37 +10,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="610.0" prefWidth="798.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs3560a2.HelloController">
+<VBox alignment="CENTER" prefHeight="497.0" prefWidth="611.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs3560a2.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" prefHeight="625.0" prefWidth="758.0">
+      <SplitPane dividerPositions="0.2" prefHeight="625.0" prefWidth="758.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="222.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="164.0">
                <children>
-                  <TreeView fx:id="ul" layoutX="11.0" layoutY="38.0" prefHeight="568.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TreeView fx:id="ul" layoutX="11.0" layoutY="38.0" prefHeight="568.0" prefWidth="172.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="570.0" prefWidth="155.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="407.0">
                <children>
-                  <Pane layoutX="96.0" layoutY="40.0">
+                  <Pane layoutX="43.0" layoutY="36.0" prefHeight="80.0" prefWidth="298.0">
                      <children>
-                        <TextField fx:id="idField" layoutX="1.0" prefHeight="26.0" prefWidth="278.0" promptText="USER ID" />
-                        <Button fx:id="addUser" layoutX="295.0" mnemonicParsing="false" onMouseClicked="#addButtonHandler" prefHeight="25.0" prefWidth="74.0" text="Add User" />
-                        <TextField fx:id="groupField" layoutY="50.0" prefHeight="26.0" prefWidth="278.0" promptText="GROUP ID" />
-                        <Button fx:id="addGroup" layoutX="295.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#addGroupHandler" text="Add Group" />
+                        <TextField fx:id="idField" layoutX="1.0" prefHeight="26.0" prefWidth="151.0" promptText="USER ID" />
+                        <Button fx:id="addUser" layoutX="206.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#addButtonHandler" prefHeight="25.0" prefWidth="74.0" text="Add User" />
+                        <TextField fx:id="groupField" layoutY="50.0" prefHeight="26.0" prefWidth="151.0" promptText="GROUP ID" />
+                        <Button fx:id="addGroup" layoutX="205.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#addGroupHandler" text="Add Group" />
                      </children>
                   </Pane>
-                  <Button fx:id="checkUser" layoutX="100.0" layoutY="159.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="343.0" text="User View" onMouseClicked="#userView">
+                  <Button fx:id="checkUser" layoutX="43.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#userView" prefHeight="47.0" prefWidth="283.0" text="User View">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="showTotal" layoutX="63.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#showTotalUser" prefHeight="25.0" prefWidth="172.0" text="Show Total User" />
-                  <Button fx:id="showGroupTotal" layoutX="309.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#showGroupTotal" prefHeight="25.0" prefWidth="172.0" text="Show Group Total" />
-                  <Button fx:id="showMessageTotal" layoutX="64.0" layoutY="476.0" mnemonicParsing="false" onMouseClicked="#showTotalMessage" prefHeight="25.0" prefWidth="172.0" text="Show Messages Total" />
-                  <Button fx:id="showPositive" layoutX="310.0" layoutY="476.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="172.0" text="Show Positive Percentage" />
+                  <Button fx:id="showTotal" layoutX="50.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#showTotalUser" prefHeight="25.0" prefWidth="118.0" text="Show Total User" />
+                  <Button fx:id="showGroupTotal" layoutX="215.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#showGroupTotal" prefHeight="25.0" prefWidth="118.0" text="Show Group Total" />
+                  <Button fx:id="showMessageTotal" layoutX="50.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#showTotalMessage" prefHeight="25.0" prefWidth="118.0" text="Show Messages Total" />
+                  <Button fx:id="showPositive" layoutX="215.0" layoutY="314.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Show Positive Percentage" />
+                  <Button fx:id="timeCreated" layoutX="52.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#getTimeCreated" prefHeight="25.0" prefWidth="118.0" text="Time Created" />
+                  <Button fx:id="lastUpdate" layoutX="216.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#getLastUpdate" prefHeight="25.0" prefWidth="118.0" text="Last Updated" />
                </children>
             </AnchorPane>
         </items>
